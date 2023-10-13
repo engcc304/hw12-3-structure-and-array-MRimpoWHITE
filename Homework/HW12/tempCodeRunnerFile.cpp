@@ -1,4 +1,2 @@
- else
-            {
-                printf("wrong input, try again! \n" , want);
-            }
+            printf("\nEmployee Name :");
+            scanf("%s", einfo[i].Name );
