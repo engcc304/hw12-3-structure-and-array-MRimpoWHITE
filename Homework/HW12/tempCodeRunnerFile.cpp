@@ -1,2 +1,2 @@
-            printf("\nEmployee Name :");
-            scanf("%s", einfo[i].Name );
+printf("\nDuration (Year) :");
+            // scanf("%d", &einfo[i].dura );

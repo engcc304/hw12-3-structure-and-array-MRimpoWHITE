@@ -44,7 +44,6 @@
 // TODO: #21 output money should in decimal format (eg. 120,200,340.42).
 
 #include <stdio.h>
-#include <locale.h>
 
 struct employeeinfo
 {
@@ -52,9 +51,44 @@ struct employeeinfo
     int salary , dura ;
 } typedef employeeinfo;
 
+
+// void addcomma(int money){
+
+//     int temp = 1, comma_count = 0 , i = 0;
+
+//     int temp_salary = money;
+    
+//     while (temp_salary > 0)
+//     {
+//         temp_salary /= 10 ;
+//         comma_count++;
+//     }
+
+//     for (i = 1; i < comma_count; i++)
+//     {
+//         temp *= 10;
+//     }
+
+//     i = 0;
+
+//     while (temp > 0)
+//     {
+//         printf("%d", money / temp);
+//         money %= temp;
+//         temp /= 10;
+//         i++;
+
+//         if (i < comma_count && i % 3 == 0)
+//         {
+//             printf(",");
+//         }
+//     }
+//     printf(".00");
+// }
+
+
 int main()
 {
-    setlocale(LC_NUMERIC, "");
     int count = 0 ;
     char want;
     employeeinfo einfo[99];
@@ -111,15 +145,15 @@ int main()
     
     float mostsala = einfo[0].salary;
 
-    printf( "Average of Salary : %'.2f Bath\n" , avg ) ;
-    printf( "Payment of every month : %'.2f Bath\n" , allsala ) ;
+    // addcomma(avg);
+    // printf( "\n" );
+    // addcomma(allsala);
+        
+    printf( "Average of Salary : %.2f Bath\n" , avg ) ;
+    printf( "Payment of every month : %.2f Bath\n" , allsala ) ;
     printf( "----------------------------------------\n" ) ;
     printf( "Name : %s (%d Years)\n" , einfo[0].Name , einfo[0].dura ) ;
-    printf( "Salary : %'.2f Bath\n" , mostsala ) ;
-
-
-    
-
+    printf( "Salary : %.2f Bath\n" , mostsala ) ;
 
     return 0 ;
 }
