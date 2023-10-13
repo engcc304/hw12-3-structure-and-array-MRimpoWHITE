@@ -1,35 +1,35 @@
 /*
     ผู้ใช้กรอกข้อมูลพนักงานในบริษัท โดยจะกรอกข้อมูล ชื่อ, เงินเดือน, อายุการทำงาน ของแต่ละคน โดยเมื่อผู้ใช้กรอกตัว n จะถือเป็นการหยุดโปรแกรมและทำการแสดงข้อมูลเงินเดือนเฉลี่ยของพนักงานในบริษัท และเงินเดือนของทุกคนรวมกันที่ผู้บริหารต้องจ่าย และแสดงคนที่อายุงานเยอะที่สุดพร้อมระบุ ชื่อ เงินเดือน และอายุงาน ของคนๆ นั้น
-    
+
     Test case:
-        Do you want to Enter Employee Information? (y/n) : 
+        Do you want to Enter Employee Information? (y/n) :
             y
         ----
-        Employee Name : 
+        Employee Name :
             Yorn
-        Salary (Bath/Month) : 
+        Salary (Bath/Month) :
             15000
-        Duration (Year) : 
+        Duration (Year) :
             4
-        Do you want to Enter Employee Information? (y/n) : 
+        Do you want to Enter Employee Information? (y/n) :
             y
         ----
-        Employee Name : 
+        Employee Name :
             Van
-        Salary (Bath/Month) : 
+        Salary (Bath/Month) :
             14550
-        Duration (Year) : 
+        Duration (Year) :
             2
-        Do you want to Enter Employee Information? (y/n) : 
+        Do you want to Enter Employee Information? (y/n) :
             y
         ----
-        Employee Name : 
+        Employee Name :
             Thane
-        Salary (Bath/Month) : 
+        Salary (Bath/Month) :
             22500
-        Duration (Year) : 
+        Duration (Year) :
             8
-        Do you want to Enter Employee Information? (y/n) : 
+        Do you want to Enter Employee Information? (y/n) :
             n
     Output:
         Average of Salary : 17,350.00 Bath
@@ -41,4 +41,119 @@
 
 */
 
-//TODO: #21 output money should in decimal format (eg. 120,200,340.42).
+// TODO: #21 output money should in decimal format (eg. 120,200,340.42).
+
+#include <stdio.h>
+
+struct employeeinfo
+{
+    char Name[99];
+    int salary , dura ;
+} typedef employeeinfo;
+
+
+// void addcomma(int money){
+
+//     int temp = 1, comma_count = 0 , i = 0;
+
+//     int temp_salary = money;
+    
+//     while (temp_salary > 0)
+//     {
+//         temp_salary /= 10 ;
+//         comma_count++;
+//     }
+
+//     for (i = 1; i < comma_count; i++)
+//     {
+//         temp *= 10;
+//     }
+
+//     i = 0;
+
+//     while (temp > 0)
+//     {
+//         printf("%d", money / temp);
+//         money %= temp;
+//         temp /= 10;
+//         i++;
+
+//         if (i < comma_count && i % 3 == 0)
+//         {
+//             printf(",");
+//         }
+//     }
+//     printf(".00");
+// }
+
+
+int main()
+{
+    int count = 0 ;
+    char want;
+    employeeinfo einfo[99];
+
+    for (int i = 0; want != 'n' ; i++ , count++ )
+    {
+        printf("Do you want to Enter Employee Information? (y/n) :");
+        scanf("%s", &want);
+        if ( want == 'n' )
+        {
+             break;
+        }
+        else if ( want == 'y' )
+        {
+            printf("\nEmployee Name :");
+            scanf("%s", einfo[i].Name );
+                
+            printf("\nSalary (Bath/Month) :");
+            scanf("%d", &einfo[i].salary );
+                
+            printf("\nDuration (Year) :");
+            scanf("%d", &einfo[i].dura );
+
+            printf( "\n" ) ;
+        }
+        else
+        {
+            printf("wrong input, try again! \n");
+        }
+    }
+
+
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = i + 1; j < count; j++)
+        {
+            if (einfo[i].dura < einfo[j].dura )
+            {
+                employeeinfo temp = einfo[i];
+                einfo[i] = einfo[j];
+                einfo[j] = temp;
+            }
+        }
+    }
+
+    float allsala ; 
+
+    for (int i = 0; i <= count ; i++)
+    {
+        allsala += einfo[i].salary ; 
+    }
+    
+    float avg = allsala / count ;
+    
+    float mostsala = einfo[0].salary;
+
+    // addcomma(avg);
+    // printf( "\n" );
+    // addcomma(allsala);
+        
+    printf( "Average of Salary : %.2f Bath\n" , avg ) ;
+    printf( "Payment of every month : %.2f Bath\n" , allsala ) ;
+    printf( "----------------------------------------\n" ) ;
+    printf( "Name : %s (%d Years)\n" , einfo[0].Name , einfo[0].dura ) ;
+    printf( "Salary : %.2f Bath\n" , mostsala ) ;
+
+    return 0 ;
+}
